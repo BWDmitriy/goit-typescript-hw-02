@@ -1,8 +1,8 @@
 import { Oval } from 'react-loader-spinner';
 
-export default function Loader({loaderClass}) {
+const Loader: React.FC = () => {
     return (
-      <div className={loaderClass}>
+      <div>
 <Oval
   visible={true}
   height="80"
@@ -15,3 +15,6 @@ export default function Loader({loaderClass}) {
 </div>
   );
 }
+
+
+export default Loader;
