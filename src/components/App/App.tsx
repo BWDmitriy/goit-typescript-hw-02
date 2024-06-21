@@ -10,9 +10,11 @@ import ImageModal from '../ImageModal/ImageModal';
 
 interface Image {
   id: string;
-  webformatURL: string;
-  largeImageURL: string;
-  description: string;
+  urls: {
+    small: string;
+    full: string;
+  };
+  alt_description: string;
 }
 
 const App: React.FC = () => {
@@ -74,7 +76,7 @@ const App: React.FC = () => {
       <SearchBar onSubmit={handleSearchSubmit} />
       {images.length > 0 && (
         <ImageGallery
-          images={images.map(image => ({ url: image.webformatURL, alt: image.description }))}
+          images={images.map(image => ({ url: image.urls.small, alt: image.alt_description }))}
           onImageClick={index => handleImageClick(images[index])}
         />
       )}

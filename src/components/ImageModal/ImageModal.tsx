@@ -5,8 +5,10 @@ Modal.setAppElement('#root');
 interface ImageModalProps {
   isOpen: boolean;
   selectedImage: {
-    largeImageURL: string;
-    description: string;
+    urls: {
+      full: string;
+    };
+    alt_description: string;
   } | null;
   onRequestClose: () => void;
 }
@@ -24,7 +26,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpen, selectedImage, onReques
       className="modal"
       overlayClassName="overlay"
     >
-      <img src={selectedImage.largeImageURL} alt={selectedImage.description || 'Selected image'} />
+      <img src={selectedImage.urls.full} alt={selectedImage.alt_description || 'Selected image'} />
       <button onClick={onRequestClose}>Close</button>
     </Modal>
   );
