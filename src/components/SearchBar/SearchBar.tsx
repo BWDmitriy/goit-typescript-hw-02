@@ -5,21 +5,21 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
-  const [inputValue, setInputValue] = useState<string>('');
+const [inputValue, setInputValue] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
-    setIsError(false); // Clear error state when input changes
+    setIsError(false); 
   };
 
-  const handleSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (inputValue.trim() === '') {
-      setIsError(true); // Set error state if input is empty
-      return; // Prevent form submission
+      setIsError(true); 
+      return; 
     }
-    onSubmit(inputValue); // Pass inputValue to onSubmit
+    onSubmit(inputValue); 
   };
 
   return (

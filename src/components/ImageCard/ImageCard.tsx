@@ -7,7 +7,7 @@ interface ImageCardProps {
 const ImageCard: React.FC<ImageCardProps> = ({ imageUrl, altText, onClick }) => {
   return (
     <div onClick={onClick}>
-      <img src={imageUrl} alt={altText} />
+      <img src={imageUrl} alt={altText || 'Image'} />
     </div>
   );
 };

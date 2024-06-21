@@ -1,10 +1,10 @@
 .loadMoreBtn {
-    background-color: #007bff; /* Blue background */
-    color: white; /* White text */
+    background-color: #007bff; 
+    color: white; 
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    display: block; /* Makes it easier to center */
-    margin: 20px auto; /* Centers the button horizontally */
+    display: block;
+    margin: 20px auto; 
 }

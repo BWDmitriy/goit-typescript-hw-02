@@ -21,7 +21,7 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const fetchImages = useCallback(async () => {
     setIsLoading(true);
@@ -53,7 +53,7 @@ const App: React.FC = () => {
     setPage(prevPage => prevPage + 1);
   };
 
-  const handleSearchSubmit = (inputValue) => {
+  const handleSearchSubmit = async (inputValue: string) => {
     setQuery(inputValue);
     setPage(1);
     setImages([]);
