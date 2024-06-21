@@ -12,7 +12,6 @@ interface Image {
   id: string;
   webformatURL: string;
   largeImageURL: string;
-  images: { url: string; alt: string }[];
   description: string;
 }
 
