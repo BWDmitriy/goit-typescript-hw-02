@@ -35,7 +35,7 @@ const App: React.FC = () => {
       if (page === 1) {
         setImages(newImages);
       } else {
-        setImages(prevImages => [...prevImages,...newImages]);
+        setImages(prevImages => [...prevImages, ...newImages]);
       }
     } catch (error) {
       setError('Failed to fetch images');
@@ -46,8 +46,8 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (query) {
-    fetchImages();
-  }
+      fetchImages();
+    }
   }, [fetchImages]);
 
   const loadMore = () => {
@@ -59,18 +59,26 @@ const App: React.FC = () => {
     setPage(1);
     setImages([]);
   };
+
   const handleImageClick = (image: Image) => {
     setSelectedImage(image);
     setIsModalOpen(true);
   };
-   const closeModal = () => {
+
+  const closeModal = () => {
     setIsModalOpen(false);
   };
+
   return (
     <div>
       <SearchBar onSubmit={handleSearchSubmit} />
-      {images.length > 0 && <ImageGallery images={images} onImageClick={handleImageClick} />}
-       {isModalOpen && selectedImage && (
+      {images.length > 0 && (
+        <ImageGallery
+          images={images.map(image => ({ url: image.webformatURL, alt: image.description }))}
+          onImageClick={index => handleImageClick(images[index])}
+        />
+      )}
+      {isModalOpen && selectedImage && (
         <ImageModal
           isOpen={isModalOpen}
           selectedImage={selectedImage}
