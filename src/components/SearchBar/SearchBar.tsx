@@ -1,15 +1,19 @@
 import { useState } from "react";
 
-export default function SearchBar({ onSubmit }) {
-  const [inputValue, setInputValue] = useState('');
-  const [isError, setIsError] = useState(false);
+interface SearchBarProps {
+  onSubmit: (query: string) => void;
+}
 
-  const handleInputChange = (event) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
+  const [inputValue, setInputValue] = useState<string>('');
+  const [isError, setIsError] = useState<boolean>(false);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
     setIsError(false); // Clear error state when input changes
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     if (inputValue.trim() === '') {
       setIsError(true); // Set error state if input is empty
@@ -35,3 +39,5 @@ export default function SearchBar({ onSubmit }) {
     </header>
   );
 }
+
+export default SearchBar;
