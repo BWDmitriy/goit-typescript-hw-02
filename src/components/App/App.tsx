@@ -12,6 +12,8 @@ interface Image {
   id: string;
   webformatURL: string;
   largeImageURL: string;
+  images: { url: string; alt: string }[];
+  description: string;
 }
 
 const App: React.FC = () => {
@@ -20,7 +22,7 @@ const App: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const fetchImages = useCallback(async () => {
@@ -58,7 +60,7 @@ const App: React.FC = () => {
     setPage(1);
     setImages([]);
   };
-const handleImageClick = (image) => {
+  const handleImageClick = (image: Image) => {
     setSelectedImage(image);
     setIsModalOpen(true);
   };
