@@ -20,3 +20,8 @@
   height: 200px;
   width: -webkit-fill-available;
 }
+@media (min-width: 1200px) {
+  .imageGallery img {
+  height: 300px;
+}
+} 

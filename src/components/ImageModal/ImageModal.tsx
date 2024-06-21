@@ -27,7 +27,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpen, selectedImage, onReques
       overlayClassName="overlay"
     >
       <img src={selectedImage.urls.full} alt={selectedImage.alt_description || 'Selected image'} />
-      <button onClick={onRequestClose}>Close</button>
+      {/* <button onClick={onRequestClose}>Close</button> */}
     </Modal>
   );
 };
