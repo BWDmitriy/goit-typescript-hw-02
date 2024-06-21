@@ -1,7 +1,12 @@
-import React from 'react';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
+
+interface ImageModalProps {
+  imageUrl: string;
+  altText: string;
+  onClose: () => void;
+}
 
 function ImageModal({ isOpen, selectedImage, onRequestClose }) {
   return (
