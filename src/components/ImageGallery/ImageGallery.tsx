@@ -1,9 +1,10 @@
 import ImageCard from "../ImageCard/ImageCard";
 import styles from "./ImageGallery.module.css";
+import { Image } from "../App/App";
 
 interface ImageGalleryProps {
-  images: { url: string;  alt: string}[];
-  onImageClick: (index: number) => void
+  images: Image[];
+  onImageClick: (image: Image) => void
 }
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images, onImageClick }) => {
   return (
@@ -11,9 +12,9 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, onImageClick }) => 
       {images.map((image, index) => (
         <ImageCard
           key={index}
-          imageUrl={image.url}
-          altText={image.alt}
-          onClick={() => onImageClick(index)}
+          imageUrl={image.urls.small}
+          altText={image.alt_description}
+          onClick={() => onImageClick(image)}
         />
       ))}
     </ul>

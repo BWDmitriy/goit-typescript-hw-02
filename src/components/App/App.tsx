@@ -1,14 +1,14 @@
-import { useEffect, useState, useCallback } from 'react';
-import './App.css';
-import ImageGallery from '../ImageGallery/ImageGallery';
-import axios from 'axios';
-import SearchBar from '../SearchBar/SearchBar';
-import Loader from '../Loader/Loader';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
-import ImageModal from '../ImageModal/ImageModal';
+import { useEffect, useState, useCallback } from "react";
+import "./App.css";
+import ImageGallery from "../ImageGallery/ImageGallery";
+import axios from "axios";
+import SearchBar from "../SearchBar/SearchBar";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "../ImageModal/ImageModal";
 
-interface Image {
+export interface Image {
   id: string;
   urls: {
     small: string;
@@ -16,7 +16,11 @@ interface Image {
   };
   alt_description: string;
 }
-
+interface ImageResponse {
+  total: number;
+  total_pages: number;
+  results: Image[]
+}
 const App: React.FC = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [query, setQuery] = useState<string>("");
@@ -30,17 +34,17 @@ const App: React.FC = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.get(
+      const response = await axios.get<ImageResponse>(
         `https://api.unsplash.com/search/photos?client_id=WWP0ZkMHW4a1CGgA-GBI0FrCCywjnB3L6d04IFuYIlk&query=${query}&page=${page}`
       );
       const newImages = response.data.results;
       if (page === 1) {
         setImages(newImages);
       } else {
-        setImages(prevImages => [...prevImages, ...newImages]);
+        setImages((prevImages) => [...prevImages, ...newImages]);
       }
     } catch (error) {
-      setError('Failed to fetch images');
+      setError("Failed to fetch images");
     } finally {
       setIsLoading(false);
     }
@@ -53,7 +57,7 @@ const App: React.FC = () => {
   }, [fetchImages]);
 
   const loadMore = () => {
-    setPage(prevPage => prevPage + 1);
+    setPage((prevPage) => prevPage + 1);
   };
 
   const handleSearchSubmit = async (inputValue: string) => {
@@ -76,8 +80,8 @@ const App: React.FC = () => {
       <SearchBar onSubmit={handleSearchSubmit} />
       {images.length > 0 && (
         <ImageGallery
-          images={images.map(image => ({ url: image.urls.small, alt: image.alt_description }))}
-          onImageClick={index => handleImageClick(images[index])}
+          images={images}
+          onImageClick={handleImageClick}
         />
       )}
       {isModalOpen && selectedImage && (
@@ -92,6 +96,6 @@ const App: React.FC = () => {
       {images.length > 0 && <LoadMoreBtn loadMore={loadMore} />}
     </div>
   );
-}
+};
 
 export default App;
